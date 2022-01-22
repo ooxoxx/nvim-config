@@ -56,7 +56,7 @@ local function on_attach(client)
   local diag_opts = '{ width = 80, focusable = false, border = "single" }'
   lsp_map('n', 'K',          '<cmd>lua vim.lsp.buf.hover()<CR>')
   lsp_map('n', '<c-k>',      '<cmd>lua vim.lsp.buf.signature_help()<CR>')
-  lsp_map('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<CR>')
+  lsp_map('n', '<leader>o', '<cmd>lua vim.lsp.buf.code_action()<CR>')
   lsp_map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   lsp_map('n', '<leader>ls', '<cmd>lua vim.diagnostic.open_float('.. diag_opts ..')<CR>')
 end
