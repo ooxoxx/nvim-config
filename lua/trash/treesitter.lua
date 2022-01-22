@@ -10,6 +10,7 @@ require 'nvim-treesitter.configs'.setup {
     'tsx',
     'typescript',
     'svelte',
+    'go',
   },
   highlight = { enable = true },
 }
