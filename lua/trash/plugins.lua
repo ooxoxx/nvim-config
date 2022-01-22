@@ -66,6 +66,7 @@ packer.startup(function(use)
   use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
   use { 'prettier/vim-prettier', run = 'yarn install' }
   use 'joshdick/onedark.vim'
+  use 'folke/tokyonight.nvim'
 end)
 
 if is_first_time then

@@ -58,7 +58,7 @@ local function on_attach(client)
   lsp_map('n', '<c-k>',      '<cmd>lua vim.lsp.buf.signature_help()<CR>')
   lsp_map('n', '<leader>af', '<cmd>lua vim.lsp.buf.code_action()<CR>')
   lsp_map('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  lsp_map('n', '<leader>ls', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics('.. diag_opts ..')<CR>')
+  lsp_map('n', '<leader>ls', '<cmd>lua vim.diagnostic.open_float('.. diag_opts ..')<CR>')
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -85,6 +85,7 @@ lspconfig.jsonls.setup(default_config)
 lspconfig.tsserver.setup(default_config)
 lspconfig.vimls.setup(default_config)
 lspconfig.yamlls.setup(default_config)
+lspconfig.gopls.setup(default_config)
 
 --[[
 -- Lua language server

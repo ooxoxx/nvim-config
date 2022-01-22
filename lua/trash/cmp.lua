@@ -31,9 +31,11 @@ cmp.setup {
 
   mapping = {
     ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
-    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i'}),
-    ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i'}),
+    ['<Tab>'] = cmp.mapping.confirm({ select = true, behavior = cmp.ConfirmBehavior.Replace }),
+    ['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i'}),
+    ['<down>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i'}),
+    ['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i'}),
+    ['<up>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i'}),
   },
 
   -- You should specify your *installed* sources.

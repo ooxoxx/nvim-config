@@ -39,7 +39,7 @@ vim.opt.relativenumber = true
 
 -- Safely call command to set colorscheme
 -- but do not stop execution
-local colorscheme_cmd = 'colorscheme onedark'
+local colorscheme_cmd = 'colorscheme tokyonight'
 local success, err = pcall(vim.cmd, colorscheme_cmd)
 if not success then
   vim.api.nvim_err_writeln(err)
