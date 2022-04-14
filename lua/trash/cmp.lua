@@ -15,10 +15,10 @@ vim.g.vsnip_filetypes = {
 }
 
 local keyopts = { expr = true, noremap = false }
-utils.key_mapper('i', '<C-j>', 'vsnip#jumpable(1)  ? "\\<Plug>(vsnip-jump-next)" : "\\<Tab>"', keyopts)
-utils.key_mapper('s', '<C-j>', 'vsnip#jumpable(1)  ? "\\<Plug>(vsnip-jump-next)" : "\\<Tab>"', keyopts)
-utils.key_mapper('i', '<C-k>', 'vsnip#jumpable(-1) ? "\\<Plug>(vsnip-jump-prev)" : "\\<S-Tab>"', keyopts)
-utils.key_mapper('s', '<C-k>', 'vsnip#jumpable(-1) ? "\\<Plug>(vsnip-jump-prev)" : "\\<S-Tab>"', keyopts)
+utils.key_mapper('i', '<M-j>', 'vsnip#jumpable(1)  ? "\\<Plug>(vsnip-jump-next)" : "\\<Tab>"', keyopts)
+utils.key_mapper('s', '<M-j>', 'vsnip#jumpable(1)  ? "\\<Plug>(vsnip-jump-next)" : "\\<Tab>"', keyopts)
+utils.key_mapper('i', '<M-k>', 'vsnip#jumpable(-1) ? "\\<Plug>(vsnip-jump-prev)" : "\\<S-Tab>"', keyopts)
+utils.key_mapper('s', '<M-k>', 'vsnip#jumpable(-1) ? "\\<Plug>(vsnip-jump-prev)" : "\\<S-Tab>"', keyopts)
 
 -- Setup nvim-cmp
 cmp.setup {

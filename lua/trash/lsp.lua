@@ -17,9 +17,13 @@ vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
 })
 
 -- Add border like lspsaga
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signatureHelp, {
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
   border = 'single',
 })
+
+-- vim.lsp.handlers['textDocument/formatting'] = vim.lsp.with(vim.lsp.buf.formatting, {
+--   insertSpaces = true,
+-- })
 
 -- Code action popup
 -- but only use it if installed
@@ -48,9 +52,11 @@ local function on_attach(client)
   lsp_map('n', 'gW',         '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
   lsp_map('n', 'gr',         '<cmd>lua vim.lsp.buf.references()<CR>')
   lsp_map('n', 'gt',         '<cmd>lua vim.lsp.buf.type_definition()<CR>')
-  lsp_map('n', '<leader>le', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+  lsp_map('n', 'gn',         '<cmd>lua vim.diagnostic.goto_next()<CR>')
+  lsp_map('n', 'gN',         '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+  lsp_map('n', '<leader>le', '<cmd>lua vim.diagnostic.setloclist()<CR>')
   lsp_map('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
-  lsp_map('n', '<leader>lw', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+  lsp_map('n', '<leader>w',  '<cmd>lua vim.lsp.buf.formatting_sync()<CR><cmd>w<CR>')
 
   -- Replacement for lspsaga
   local diag_opts = '{ width = 80, focusable = false, border = "single" }'
@@ -76,7 +82,7 @@ local default_config = {
 }
 
 -- Language Servers
--- lspconfig.pyls.setup(default_config)
+lspconfig.jedi_language_server.setup(default_config)
 lspconfig.bashls.setup(default_config)
 lspconfig.cssls.setup(default_config)
 lspconfig.dockerls.setup(default_config)
@@ -85,7 +91,19 @@ lspconfig.jsonls.setup(default_config)
 lspconfig.tsserver.setup(default_config)
 lspconfig.vimls.setup(default_config)
 lspconfig.yamlls.setup(default_config)
-lspconfig.gopls.setup(default_config)
+lspconfig.gopls.setup({
+  settings = {
+    gopls = {
+      analyses = {
+        composites = false,
+      },
+    },
+  },
+  -- default_config
+  on_attach = on_attach,
+  capabilities = capabilities,
+})
+-- lspconfig.eslint.setup(default_config)
 
 --[[
 -- Lua language server
@@ -110,3 +128,24 @@ lspconfig.sumneko_lua.setup(vim.tbl_extend('force', default_config, {
   },
   root_dir = root_pattern('.luals'),
 })) ]]
+function org_imports(wait_ms)
+  local params = vim.lsp.util.make_range_params()
+  params.context = {only = {"source.organizeImports"}}
+  local result = vim.lsp.buf_request_sync(0, "textDocument/codeAction", params, wait_ms)
+  for _, res in pairs(result or {}) do
+    for _, r in pairs(res.result or {}) do
+      if r.edit then
+        vim.lsp.util.apply_workspace_edit(r.edit)
+      else
+        vim.lsp.buf.execute_command(r.command)
+      end
+    end
+  end
+end
+
+local M = {}
+
+M.on_attach = on_attach
+M.capabilities = capabilities
+
+return M

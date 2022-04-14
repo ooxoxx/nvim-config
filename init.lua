@@ -29,6 +29,10 @@ vim.cmd 'au ColorScheme * hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermb
 vim.cmd 'au ColorScheme * hi FloatBorder guifg=#eeeeee'
 vim.cmd 'augroup END'
 
+vim.cmd 'augroup GO_LSP'
+vim.cmd 'autocmd!'
+vim.cmd 'autocmd BufWritePre *.go :silent! lua org_imports(3000)'
+vim.cmd 'augroup END'
 -- ====================================================================================
 -- Theme
 -- ====================================================================================
@@ -80,5 +84,7 @@ vim.opt.ttimeoutlen = 50
 vim.opt.ignorecase = true
 vim.opt.wildignorecase = true
 vim.opt.smarttab = true
+vim.g.NERDTreeQuitOnOpen = 1
+vim.opt.mouse = 'a'
 
 require 'trash'

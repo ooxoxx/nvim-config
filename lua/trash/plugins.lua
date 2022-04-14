@@ -38,8 +38,15 @@ packer.startup(function(use)
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'anott03/nvim-lspinstall'
-  use 'dense-analysis/ale'
-  use 'nathunsmitty/nvim-ale-diagnostic'
+  -- use 'dense-analysis/ale'
+  -- use 'nathunsmitty/nvim-ale-diagnostic'
+  use {
+    'jose-elias-alvarez/null-ls.nvim', 
+    config = function()
+      require("null-ls").setup()
+    end,
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
   use { 'RishabhRD/nvim-lsputils', requires = {'RishabhRD/popfix'} }
   -- use 'glepnir/lspsaga.nvim'
   -- use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}}
